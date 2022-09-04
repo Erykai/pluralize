@@ -13,26 +13,21 @@ class Pluralize extends Resource
      */
     public function singular(string $word): string
     {
-        if ($this->ucountable($word)) {
+        if ($this->uncountable($word)) {
             return $word;
         }
-
-        foreach ( $this->getIrregular() as $pattern => $result )
-        {
+        foreach ($this->getIrregular() as $result => $pattern) {
             $pattern = '/' . $pattern . '$/i';
 
-            if ( preg_match( $pattern, $word ) ) {
+            if (preg_match($pattern, $word)) {
                 return preg_replace($pattern, $result, $word);
             }
         }
-
-        foreach ( $this->getPlural() as $pattern => $result )
-        {
-            if ( preg_match( $pattern, $word ) ) {
+        foreach ($this->getSingular() as $pattern => $result) {
+            if (preg_match($pattern, $word)) {
                 return preg_replace($pattern, $result, $word);
             }
         }
-
         return $word;
     }
 
@@ -42,21 +37,18 @@ class Pluralize extends Resource
      */
     public function plural(string $word): string
     {
-        if ($this->ucountable($word)) {
+        if ($this->uncountable($word)) {
             return $word;
         }
-        foreach ( $this->getIrregular() as $result => $pattern )
-        {
+        foreach ($this->getIrregular() as $pattern => $result) {
             $pattern = '/' . $pattern . '$/i';
 
-            if ( preg_match( $pattern, $word ) ) {
+            if (preg_match($pattern, $word)) {
                 return preg_replace($pattern, $result, $word);
             }
         }
-
-        foreach ( $this->getSingular() as $pattern => $result )
-        {
-            if ( preg_match(  $pattern,  $word ) ) {
+        foreach ($this->getPlural() as $pattern => $result) {
+            if (preg_match($pattern, $word)) {
                 return preg_replace($pattern, $result, $word);
             }
         }
