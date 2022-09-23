@@ -5,7 +5,7 @@ namespace Erykai\Pluralize;
 /**
  * Resource Pluralize
  */
-class Resource
+abstract class Resource
 {
     use TraitPluralize;
 
