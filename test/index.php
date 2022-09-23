@@ -1,5 +1,5 @@
 <?php
-use \Erykai\Pluralize;
+use Erykai\Pluralize\Pluralize;;
 require "vendor/autoload.php";
 echo (new Pluralize())->plural('friend');
 //print friends
